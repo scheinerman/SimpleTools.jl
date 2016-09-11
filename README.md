@@ -110,7 +110,8 @@ of all the counts.
 this might include objects with value `0` (this might happen if we were
 to use `incr!` to decrease a count to zero).
 * `keys(c)` returns an iterator for the keys held by `c`.
-* `showall(c)` gives a print out of all the keys and their values in `c`.
+* `showall(c)` gives a print out of all the keys and their nonzero
+values in `c`.
 * `reset!(c)` sets all counts in `c` to `0`.
 * `clean!(c)` removes all keys from `c` whose value is `0`. This
 won't change its behavior, but will free up some memory.
