@@ -5,5 +5,6 @@ obvious home, but are useful for my `SimpleWorld` modules.
 module SimpleTools
 
 include("dict_compose.jl")
+include("counter.jl")
 
 end # end of module

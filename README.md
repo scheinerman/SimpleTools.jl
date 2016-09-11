@@ -62,3 +62,63 @@ WARNING: 1 keys were not mapped
 Dict{ASCIIString,Float64} with 1 entry:
   "alpha" => 3.33
 ```
+
+## Counters
+
+We often want to count things and a way to do that is to create a dictionary
+that maps objects to their counts. A `Counter` object simplifies that
+process. Say we want to count values of type `ASCIIString`. We would
+create a counter for that type like this:
+```julia
+julia> c = Counter(ASCIIString)
+Counter{ASCIIString} with 0 entries
+```
+
+The two primary operations for a `Counter` are value increment and
+value retrieval. To increment the value, we use `incr!` like this:
+```julia
+julia> incr!(c,"hello")
+```
+To access the count, we use square brackets:
+```julia
+julia> c["hello"]
+1
+
+julia> c["bye"]
+0
+```
+Notice that we need not worry about whether or not a key is
+already known to the `Counter`. If presented with an unknown key,
+the `Counter` assumes its value is `0`.
+
+#### Notes
+
+* We may not use square brackets to set the value associated with a
+key. That is, `c["bye"]=5` won't work. Likewise, `c["bye"]+=1` is
+not permitted.
+* Most often the amount to increment is `+1`, but an optional third
+argument may be given to increment by a different amount, such as
+`incr!(c,x,2)` is equivalent to (the illegal) `c[x]+=2`.
+
+
+#### Addition of counters
+
+If `c` and `d` are counters (of the same type of object) their sum
+`c+d` creates a new counter by adding the values in `c` and `d`. That
+is, if `a=c+d` and `k` is any key, then `a[k]` equals `c[k]+d[k]`.
+
+#### More functions
+
+* `sum(c)` returns the sum of the values in `c`; that is, the total
+of all the counts.
+* `length(c)` returns the number of values held in `c`. Note that
+this might include objects with value `0` (this might happen if we were
+to use `incr!` to decrease a count to zero).
+* `keys(c)` returns an iterator for the keys held by `c`.
+* `showall(c)` gives a print out of all the keys and their values in `c`.
+* `reset!(c)` sets all counts in `c` to `0`.
+
+#### To do list
+
+* Implement `==` and `isequal`.
+* Document how to use this for parallel computation.
