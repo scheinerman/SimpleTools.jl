@@ -122,3 +122,4 @@ to use `incr!` to decrease a count to zero).
 
 * Implement `==` and `isequal`.
 * Document how to use this for parallel computation.
+* Implement `setindex!` so `c[x]+=1` can work.
