@@ -108,8 +108,7 @@ is, if `a=c+d` and `k` is any key, then `a[k]` equals `c[k]+d[k]`.
 * `sum(c)` returns the sum of the values in `c`; that is, the total
 of all the counts.
 * `length(c)` returns the number of values held in `c`. Note that
-this might include objects with value `0` (this might happen if we were
-to use `incr!` to decrease a count to zero).
+this might include objects with value `0`.
 * `keys(c)` returns an iterator for the keys held by `c`.
 * `showall(c)` gives a print out of all the keys and their nonzero
 values in `c`.
