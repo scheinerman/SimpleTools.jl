@@ -75,9 +75,10 @@ Counter{ASCIIString} with 0 entries
 ```
 
 The two primary operations for a `Counter` are value increment and
-value retrieval. To increment the value, we use `incr!` like this:
+value retrieval. To increment the value of a counter we do this:
 ```julia
-julia> incr!(c,"hello")
+julia> c["hello"] += 1
+1
 ```
 To access the count, we use square brackets:
 ```julia
