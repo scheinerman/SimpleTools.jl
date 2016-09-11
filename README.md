@@ -91,14 +91,9 @@ Notice that we need not worry about whether or not a key is
 already known to the `Counter`. If presented with an unknown key,
 the `Counter` assumes its value is `0`.
 
-#### Notes
-
-* We may not use square brackets to set the value associated with a
-key. That is, `c["bye"]=5` won't work. Likewise, `c["bye"]+=1` is
-not permitted.
-* Most often the amount to increment is `+1`, but an optional third
-argument may be given to increment by a different amount, such as
-`incr!(c,x,2)` is equivalent to (the illegal) `c[x]+=2`.
+A `Counter` may be assigned to like this `c["alpha"]=4` but
+the more likely use case is `c["bravo"]+=1` invoked each
+time a value, such as `"bravo"` is encountered.
 
 
 #### Addition of counters
@@ -117,9 +112,11 @@ to use `incr!` to decrease a count to zero).
 * `keys(c)` returns an iterator for the keys held by `c`.
 * `showall(c)` gives a print out of all the keys and their values in `c`.
 * `reset!(c)` sets all counts in `c` to `0`.
+* `clean!(c)` removes all keys from `c` whose value is `0`. This
+won't change its behavior, but will free up some memory.
 
 #### To do list
 
-* Implement `==` and `isequal`.
 * Document how to use this for parallel computation.
-* Implement `setindex!` so `c[x]+=1` can work.
+* A `Counter` should be a subtype of `Associative` and so we need
+to implement additional functions to make that legit.

@@ -1,16 +1,19 @@
-export Counter, incr!, reset!
+export Counter, clean!, reset!
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
-import Base.+, Base.showall
+import Base.+, Base.showall, Base.setindex!, Base.==
 
 """
 A `Counter` is a device for keeping a count of how often we observe
 various objects. It is created by giving a type such as
-`c=Counter(ASCIIString)`. Counts are incremented with the
-`incr!` function like this: `incr!(c,"hello")`. Counts are retrieved
-with square brackets like a dictionary: `c["hello"]`. It is safe
-to retrieve the count of an object never encountered, e.g.,
+`c=Counter(ASCIIString)`.
+
+Counts are retrieved with square brackets like a dictionary: `c["hello"]`.
+It is safe to retrieve the count of an object never encountered, e.g.,
 `c["goodbye"]`; in this case `0` is returned.
+
+Counts may be assigned with `c[key]=amount`, but the more likely use
+case is using `c[key]+=1` to count each time `key` is encountered.
 """
 type Counter{T}
   data::Dict{T,Int}
@@ -39,9 +42,11 @@ end
 held in the counter and their counts.
 """
 function showall{T}(io::IO, c::Counter{T})
-  println(io,"Counter{$T} with these values:")
+  println(io,"Counter{$T} with these nonzero values:")
   for k in keys(c)
-    println(io,"$k ==> $(c.data[k])")
+    if c[k] != 0
+      println(io,"$k ==> $(c.data[k])")
+    end
   end
 end
 
@@ -65,20 +70,10 @@ in `c`.
 """
 sum(c::Counter) = sum(values(c.data))
 
-"""
-`incr!(c,x)` increments the value associated with `x` in the
-Counter `x`. Note we do *not* need to initialize `c[x]` in any
-way. If `x` has not been previously counted, this sets the count
-to `1`. This can be called with an optional third argument,
-`incr!(c,x,amt)` in which case `c[x]` in increased by `amt`.
-"""
-function incr!{T}(c::Counter{T}, x::T, amt::Int=1)
-  if haskey(c.data,x)
-    c.data[x] += amt
-  else
-    c.data[x] = amt
-  end
-  nothing
+
+function setindex!{T}(c::Counter{T}, val::Int, k::T)
+  c.data[k] = val
+  # return val
 end
 
 """
@@ -91,6 +86,41 @@ function reset!{T}(c::Counter{T}, x::T)
   nothing
 end
 
+function =={T}(c::Counter{T}, d::Counter{T})
+  for k in keys(c)
+    if c[k] != d[k]
+      return false
+    end
+  end
+
+  for k in keys(d)
+    if c[k] != d[k]
+      return false
+    end
+  end
+
+  return true
+end
+
+isequal{T}(c::Counter{T},d::Counter{T}) = c==d
+
+
+"""
+`clean!(c)` removes all keys from `c` whose value is `0`.
+Generally, it's not necessary to invoke this unless one
+suspects that `c` contains *a lot* of keys associated with
+a zero value.
+"""
+function clean!{T}(c::Counter{T})
+  for k in keys(c)
+    if c[k] == 0
+      delete!(c.data,k)
+    end
+  end
+  nothing
+end
+
+
 """
 If `c` and `d` are `Counter`s, then `c+d` creates a new `Counter`
 in which the count associated with an object `x` is `c[x]+d[x]`.
@@ -98,7 +128,10 @@ in which the count associated with an object `x` is `c[x]+d[x]`.
 function (+){T}(c::Counter{T}, d::Counter{T})
   result = deepcopy(c)
   for k in keys(d)
-    incr!(result,k,d[k])
+    val = d[k]
+    if val != 0
+      result[k] += val
+    end
   end
   return result
 end
