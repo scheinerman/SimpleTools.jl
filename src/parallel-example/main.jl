@@ -13,9 +13,12 @@ toc()
 
 a = minimum(keys(c))
 b = maximum(keys(c))
+s = sum(c)
 
 x = collect(a:b)
-y = [c[t] for t in x]
+y = [c[t]/s for t in x]
 
 bar(x,y)
 grid()
+title("Binomial distribution")
+savefig("binomial.png")
