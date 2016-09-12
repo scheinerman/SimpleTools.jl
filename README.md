@@ -109,6 +109,8 @@ is, if `a=c+d` and `k` is any key, then `a[k]` equals `c[k]+d[k]`.
 of all the counts.
 * `length(c)` returns the number of values held in `c`. Note that
 this might include objects with value `0`.
+* `nnz(c)` returns the number of nonzero values held
+in `c`. 
 * `keys(c)` returns an iterator for the keys held by `c`.
 * `showall(c)` gives a print out of all the keys and their nonzero
 values in `c`.

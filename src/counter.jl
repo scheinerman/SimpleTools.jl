@@ -2,6 +2,7 @@ export Counter, clean!, reset!
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
+import Base.nnz
 
 """
 A `Counter` is a device for keeping a count of how often we observe
@@ -69,6 +70,20 @@ keys(c::Counter) = keys(c.data)
 in `c`.
 """
 sum(c::Counter) = sum(values(c.data))
+
+"""
+`nnz(c::Counter)` gives the number of keys in
+the `Counter` with nonzero value.
+"""
+function nnz(c::Counter)
+  amt::Int = 0
+  for k in keys(c)
+    if c.data[k] != 0
+      amt += 1
+    end
+  end
+  return amt
+end 
 
 
 function setindex!{T}(c::Counter{T}, val::Int, k::T)
