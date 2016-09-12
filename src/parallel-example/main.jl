@@ -21,4 +21,4 @@ y = [c[t]/s for t in x]
 bar(x,y)
 grid()
 title("Binomial distribution")
-savefig("binomial.png")
+savefig("binomial.pdf")
