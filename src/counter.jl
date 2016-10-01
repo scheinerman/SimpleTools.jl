@@ -16,7 +16,7 @@ It is safe to retrieve the count of an object never encountered, e.g.,
 Counts may be assigned with `c[key]=amount`, but the more likely use
 case is using `c[key]+=1` to count each time `key` is encountered.
 """
-type Counter{T}
+type Counter{T<:Any}
   data::Dict{T,Int}
   function Counter()
     d = Dict{T,Int}()
@@ -24,6 +24,7 @@ type Counter{T}
   end
 end
 
+Counter() = Counter{Any}()
 
 
 """
