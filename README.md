@@ -70,8 +70,8 @@ that maps objects to their counts. A `Counter` object simplifies that
 process. Say we want to count values of type `ASCIIString`. We would
 create a counter for that type like this:
 ```julia
-julia> c = Counter(ASCIIString)
-Counter{ASCIIString} with 0 entries
+julia> c = Counter{String}()
+Counter{String} with 0 entries
 ```
 
 The two primary operations for a `Counter` are value increment and
@@ -110,7 +110,7 @@ of all the counts.
 * `length(c)` returns the number of values held in `c`. Note that
 this might include objects with value `0`.
 * `nnz(c)` returns the number of nonzero values held
-in `c`. 
+in `c`.
 * `keys(c)` returns an iterator for the keys held by `c`.
 * `showall(c)` gives a print out of all the keys and their nonzero
 values in `c`.

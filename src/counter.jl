@@ -7,7 +7,7 @@ import Base.nnz
 """
 A `Counter` is a device for keeping a count of how often we observe
 various objects. It is created by giving a type such as
-`c=Counter(ASCIIString)`.
+`c=Counter{String}()`.
 
 Counts are retrieved with square brackets like a dictionary: `c["hello"]`.
 It is safe to retrieve the count of an object never encountered, e.g.,
@@ -18,10 +18,12 @@ case is using `c[key]+=1` to count each time `key` is encountered.
 """
 type Counter{T}
   data::Dict{T,Int}
+  function Counter()
+    d = Dict{T,Int}()
+    C = new(d)
+  end
 end
 
-Counter(dt::DataType) = Counter(Dict{dt,Int}())
-Counter() = Counter(Any)
 
 
 """
@@ -83,7 +85,7 @@ function nnz(c::Counter)
     end
   end
   return amt
-end 
+end
 
 
 function setindex!{T}(c::Counter{T}, val::Int, k::T)
