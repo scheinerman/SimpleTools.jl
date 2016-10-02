@@ -3,6 +3,7 @@ export Counter, clean!, reset!
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
 import Base.nnz
+import Base.start, Base.done, Base.next
 
 """
 A `Counter` is a device for keeping a count of how often we observe
@@ -16,7 +17,7 @@ It is safe to retrieve the count of an object never encountered, e.g.,
 Counts may be assigned with `c[key]=amount`, but the more likely use
 case is using `c[key]+=1` to count each time `key` is encountered.
 """
-type Counter{T<:Any}
+type Counter{T<:Any} <: Associative{T,Int}
   data::Dict{T,Int}
   function Counter()
     d = Dict{T,Int}()
@@ -25,6 +26,12 @@ type Counter{T<:Any}
 end
 
 Counter() = Counter{Any}()
+
+# These items make this satisfy the Associative properties
+
+start(c::Counter) = start(c.data)
+done(c::Counter,s) = done(c.data,s)
+next(c::Counter,s) = next(c.data,s)
 
 
 """

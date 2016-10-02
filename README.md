@@ -118,8 +118,13 @@ values in `c`.
 * `clean!(c)` removes all keys from `c` whose value is `0`. This
 won't change its behavior, but will free up some memory.
 
-#### To do list
+#### It's `Associative`
 
-* Document how to use this for parallel computation.
-* A `Counter` should be a subtype of `Associative` and so we need
-to implement additional functions to make that legit.
+A `Counter` is a subtype of `Associative` and therefore we can
+use methods such as `keys` and/or `values` to get iterators to
+those items.
+
+#### Counting in parallel
+
+See the `parallel-example` directory for an illustration of how to
+use `Counters` in multiple parallel processes.
