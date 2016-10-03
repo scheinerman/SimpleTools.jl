@@ -36,7 +36,7 @@ next(c::Counter,s) = next(c.data,s)
 
 """
 `length(c::Counter)` gives the number of entries monitored
-by the counter. Conceivably, some may have value `0`.
+by the Counter. Conceivably, some may have value `0`.
 """
 length(c::Counter) = length(c.data)
 
@@ -50,7 +50,7 @@ end
 
 """
 `showall(c::Counter)` displays all the objects
-held in the counter and their counts.
+held in the Counter and their counts.
 """
 function showall{T}(io::IO, c::Counter{T})
   println(io,"Counter{$T} with these nonzero values:")
@@ -63,7 +63,7 @@ end
 
 
 function getindex{T}(c::Counter{T}, x::T)
-  if haskey(c.data,x)
+  try
     return c.data[x]
   end
   return 0
@@ -96,10 +96,7 @@ function nnz(c::Counter)
 end
 
 
-function setindex!{T}(c::Counter{T}, val::Int, k::T)
-  c.data[k] = val
-  # return val
-end
+setindex!{T}(c::Counter{T}, val::Int, k::T) = c.data[k] = val
 
 """
 `reset!(c)` sets all counts in `c` to `0`
