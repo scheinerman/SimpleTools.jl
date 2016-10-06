@@ -112,9 +112,9 @@ this might include objects with value `0`.
 * `nnz(c)` returns the number of nonzero values held
 in `c`.
 * `keys(c)` returns an iterator for the keys held by `c`.
+* `values(c)` returns an iterator for the values held by `c`.
 * `showall(c)` gives a print out of all the keys and their nonzero
 values in `c`.
-* `reset!(c)` sets all counts in `c` to `0`.
 * `clean!(c)` removes all keys from `c` whose value is `0`. This
 won't change its behavior, but will free up some memory.
 

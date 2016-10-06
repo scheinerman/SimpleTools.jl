@@ -1,4 +1,4 @@
-export Counter, clean!, reset!
+export Counter, clean!
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
@@ -27,12 +27,11 @@ end
 
 Counter() = Counter{Any}()
 
-# These items make this satisfy the Associative properties
+# These items enable this to satisfy the Associative properties
 
 start(c::Counter) = start(c.data)
 done(c::Counter,s) = done(c.data,s)
 next(c::Counter,s) = next(c.data,s)
-
 
 """
 `length(c::Counter)` gives the number of entries monitored
@@ -47,7 +46,6 @@ function show{T}(io::IO, c::Counter{T})
   print(io,"Counter{$T} $msg")
 end
 
-
 """
 `showall(c::Counter)` displays all the objects
 held in the Counter and their counts.
@@ -60,7 +58,6 @@ function showall{T}(io::IO, c::Counter{T})
     end
   end
 end
-
 
 function getindex{T}(c::Counter{T}, x::T)
   try
@@ -95,18 +92,7 @@ function nnz(c::Counter)
   return amt
 end
 
-
 setindex!{T}(c::Counter{T}, val::Int, k::T) = c.data[k] = val
-
-"""
-`reset!(c)` sets all counts in `c` to `0`
-"""
-function reset!{T}(c::Counter{T}, x::T)
-  if haskey(c.data,x)
-    c[x] = 0
-  end
-  nothing
-end
 
 function =={T}(c::Counter{T}, d::Counter{T})
   for k in keys(c)
@@ -126,7 +112,6 @@ end
 
 isequal{T}(c::Counter{T},d::Counter{T}) = c==d
 
-
 """
 `clean!(c)` removes all keys from `c` whose value is `0`.
 Generally, it's not necessary to invoke this unless one
@@ -141,7 +126,6 @@ function clean!{T}(c::Counter{T})
   end
   nothing
 end
-
 
 """
 If `c` and `d` are `Counter`s, then `c+d` creates a new `Counter`
