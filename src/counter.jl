@@ -1,4 +1,4 @@
-export Counter, clean!
+export Counter, clean!, incr!
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
@@ -140,4 +140,13 @@ function (+){T}(c::Counter{T}, d::Counter{T})
     end
   end
   return result
+end
+
+
+incr!{T}(c::Counter{T}, x::T) = c[x] += 1
+
+function incr!(c::Counter, items)
+  for x in items
+    c[x] += 1
+  end
 end

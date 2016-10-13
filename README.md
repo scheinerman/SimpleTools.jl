@@ -103,6 +103,42 @@ If `c` and `d` are counters (of the same type of object) their sum
 `c+d` creates a new counter by adding the values in `c` and `d`. That
 is, if `a=c+d` and `k` is any key, then `a[k]` equals `c[k]+d[k]`.
 
+
+#### Incrementing
+
+To increment the count of an item `x` in a counter `c` we may either
+use `c[x]+=1` or the increment function like this: `incr!(c,x)`.
+
+The increment function `incr!` is more useful for incrementing a
+collection of items. Use `incr!(c,items)` to add 1 to the count
+for each element held in `items`. If an element is present in `items`
+multiple times, its count is incremented for each occurrence.
+
+```julia
+julia> c = Counter{Int}()
+SimpleTools.Counter{Int64} with 0 entries
+
+julia> items = [1,2,3,4,1,2,1]
+7-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 1
+ 2
+ 1
+
+julia> incr!(c,items)
+
+julia> showall(c)
+Counter{Int64} with these nonzero values:
+4 ==> 1
+2 ==> 2
+3 ==> 1
+1 ==> 3
+```
+
+
 #### More functions
 
 * `sum(c)` returns the sum of the values in `c`; that is, the total
