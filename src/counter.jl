@@ -143,6 +143,13 @@ function (+){T}(c::Counter{T}, d::Counter{T})
 end
 
 
+"""
+`incr!(c,x)` increments the count for `x` by 1. This is equivalent to
+`c[x]+=1`.
+
+`incr!(c,items)` is more useful. Here `items` is an iterable collection
+of keys and we increment the count for each element in `items`.
+"""
 incr!{T}(c::Counter{T}, x::T) = c[x] += 1
 
 function incr!(c::Counter, items)
