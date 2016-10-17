@@ -132,10 +132,32 @@ julia> incr!(c,items)
 
 julia> showall(c)
 Counter{Int64} with these nonzero values:
-4 ==> 1
+Counter{Int64} with these nonzero values:
+1 ==> 3
 2 ==> 2
 3 ==> 1
-1 ==> 3
+4 ==> 1
+```
+
+In addition, `incr!` may be used to increment one counter
+by the amount held in another. Note that it's the first argument `c`
+that gets changed; there is no effect on the second argument `d`.
+```julia
+julia> d = Counter{Int}();
+
+julia> d[1] = 1;;
+
+julia> d[5] = 1;
+
+julia> incr!(c,d)
+
+julia> showall(c)
+Counter{Int64} with these nonzero values:
+1 ==> 4
+2 ==> 2
+3 ==> 1
+4 ==> 1
+5 ==> 1
 ```
 
 

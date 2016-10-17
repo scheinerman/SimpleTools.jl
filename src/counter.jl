@@ -52,7 +52,12 @@ held in the Counter and their counts.
 """
 function showall{T}(io::IO, c::Counter{T})
   println(io,"Counter{$T} with these nonzero values:")
-  for k in keys(c)
+  klist = collect(keys(c))
+  try
+    sort!(klist)
+  end
+
+  for k in klist
     if c[k] != 0
       println(io,"$k ==> $(c.data[k])")
     end
@@ -128,27 +133,14 @@ function clean!{T}(c::Counter{T})
 end
 
 """
-If `c` and `d` are `Counter`s, then `c+d` creates a new `Counter`
-in which the count associated with an object `x` is `c[x]+d[x]`.
-"""
-function (+){T}(c::Counter{T}, d::Counter{T})
-  result = deepcopy(c)
-  for k in keys(d)
-    val = d[k]
-    if val != 0
-      result[k] += val
-    end
-  end
-  return result
-end
-
-
-"""
 `incr!(c,x)` increments the count for `x` by 1. This is equivalent to
 `c[x]+=1`.
 
 `incr!(c,items)` is more useful. Here `items` is an iterable collection
 of keys and we increment the count for each element in `items`.
+
+`incr!(c,d)` where `c` and `d` are counters will increment `c` by
+the amounts held in `d`.
 """
 incr!{T}(c::Counter{T}, x::T) = c[x] += 1
 
@@ -156,4 +148,21 @@ function incr!(c::Counter, items)
   for x in items
     c[x] += 1
   end
+end
+
+function incr!{T}(c::Counter{T},d::Counter{T})
+  for k in keys(d)
+    c[k] += d[k]
+  end
+end
+
+
+"""
+If `c` and `d` are `Counter`s, then `c+d` creates a new `Counter`
+in which the count associated with an object `x` is `c[x]+d[x]`.
+"""
+function (+){T}(c::Counter{T}, d::Counter{T})
+  result = deepcopy(c)
+  incr!(result,d)
+  return result
 end
