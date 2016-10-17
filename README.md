@@ -142,6 +142,9 @@ Counter{Int64} with these nonzero values:
 In addition, `incr!` may be used to increment one counter
 by the amount held in another. Note that it's the first argument `c`
 that gets changed; there is no effect on the second argument `d`.
+
+**Note**: `incr!(c,d)` and `c += d` have the same effect, but the first
+is more efficient.
 ```julia
 julia> d = Counter{Int}();
 
