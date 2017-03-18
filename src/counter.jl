@@ -1,8 +1,8 @@
-export Counter, clean!, incr!
+export Counter, clean!, incr!, mean, csv_print
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
-import Base.nnz
+import Base.nnz, Base.mean
 import Base.start, Base.done, Base.next
 
 """
@@ -165,4 +165,34 @@ function (+){T}(c::Counter{T}, d::Counter{T})
   result = deepcopy(c)
   incr!(result,d)
   return result
+end
+
+
+
+"""
+`mean(C::Counter)` computes the weighted average of the objects in `C`.
+Of course, the counted objects must be a `Number`; their multiplicity
+(weight) in the average is determined by their `C`-value.
+"""
+function mean{T<:Number}(C::Counter{T})
+  total = zero(T)
+  for k in keys(C)
+    total += k * C[k]
+  end
+  return total / sum(C)
+end
+
+"""
+`csv_print(C::Counter)` prints out `C` in a manner suitable for import into
+a spreadsheet.
+"""
+function csv_print(C::Counter)
+  klist = collect(keys(C))
+  try
+    sort!(klist)
+  end
+  for k in klist
+    println("$k, $(C[k])")
+  end
+  nothing
 end

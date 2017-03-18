@@ -179,11 +179,50 @@ values in `c`.
 * `clean!(c)` removes all keys from `c` whose value is `0`. This
 won't change its behavior, but will free up some memory.
 
+#### Average value
+
+If the objects counted in `C` are numbers, then we compute the weighted
+average of those numbers with `mean(C)`.
+```julia
+julia> C = Counter{Int}()
+SimpleTools.Counter{Int64} with 0 entries
+
+julia> C[2] = 3
+3
+
+julia> C[3] = 7
+7
+
+julia> mean(C)
+2.7
+```
+
 #### It's `Associative`
 
 A `Counter` is a subtype of `Associative` and therefore we can
 use methods such as `keys` and/or `values` to get iterators to
 those items.
+
+#### CSV Printing
+The function `csv_print` writes a `Counter` to the screen in
+comma-separated format. This can be readily used for importing
+into a spreadsheet.
+```julia
+julia> C = Counter{Float64}()
+SimpleTools.Counter{Float64} with 0 entries
+
+julia> C[3.4]=10
+10
+
+julia> C[2.2]=3
+3
+
+julia> csv_print(C)
+2.2, 3
+3.4, 10
+```
+
+
 
 #### Counting in parallel
 
