@@ -2,7 +2,7 @@ export Counter, clean!, incr!, mean, csv_print
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
-import Base.nnz, Base.mean
+import Base.nnz, Base.mean, Base.collect
 import Base.start, Base.done, Base.next
 
 """
@@ -164,6 +164,23 @@ in which the count associated with an object `x` is `c[x]+d[x]`.
 function (+){T}(c::Counter{T}, d::Counter{T})
   result = deepcopy(c)
   incr!(result,d)
+  return result
+end
+
+"""
+`collect(C)` for a `Counter` returns an array containing the elements of `C`
+each repeated according to its multiplicty.
+"""
+function collect{T}(c::Counter{T})
+  result = Vector{T}(sum(c))
+  idx = 0
+  for k in keys(c)
+    m = c[k]
+    for j=1:m
+      idx += 1
+      result[idx] = k
+    end
+  end
   return result
 end
 

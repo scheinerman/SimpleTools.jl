@@ -179,6 +179,39 @@ values in `c`.
 * `clean!(c)` removes all keys from `c` whose value is `0`. This
 won't change its behavior, but will free up some memory.
 
+In addition, we can convert a `Counter` into a one-dimensional
+array in which each element appears with its appropriate multiplicity
+using `collect`:
+
+```julia
+julia> C = Counter{Int}()
+SimpleTools.Counter{Int64} with 0 entries
+
+julia> C[3] = 4
+4
+
+julia> C[5] = 0
+0
+
+julia> C[-2] = 2
+2
+
+julia> collect(C)
+6-element Array{Int64,1}:
+  3
+  3
+  3
+  3
+ -2
+ -2
+
+julia> collect(keys(C))
+3-element Array{Int64,1}:
+  3
+ -2
+  5
+```
+
 #### Average value
 
 If the objects counted in `C` are numbers, then we compute the weighted
