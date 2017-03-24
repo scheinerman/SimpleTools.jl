@@ -1,4 +1,4 @@
-export Counter, clean!, incr!, mean, csv_print
+export Counter, counter, clean!, incr!, mean, csv_print
 
 import Base.show, Base.length, Base.getindex, Base.sum, Base.keys
 import Base.+, Base.showall, Base.setindex!, Base.==
@@ -213,3 +213,20 @@ function csv_print(C::Counter)
   end
   nothing
 end
+
+"""
+`counter(list)` creates a `Counter` whose elements are the
+members of `list` with the appropriate multiplicities.
+This may also be used if `list` is a `Set` or an `IntSet`
+(in which case multiplicities will all be 1).
+"""
+function counter(list::AbstractArray)
+  T = eltype(list)
+  C = Counter{T}()
+  for x in list
+    incr!(C,x)
+  end
+  return C
+end
+
+counter(S::Base.AbstractSet) = counter(collect(S))

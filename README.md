@@ -97,6 +97,28 @@ the more likely use case is `c["bravo"]+=1` invoked each
 time a value, such as `"bravo"` is encountered.
 
 
+#### Counting the elements of a list
+
+The function `counter` (lowercase 'c') counts the element of a list/array
+or set. The multiplicity of an element is the number of times it
+appears in the list.
+```julia
+julia> A = [ "alpha", "bravo", "alpha", "gamma" ];
+
+julia> C = counter(A);
+
+julia> showall(C)
+Counter{String} with these nonzero values:
+alpha ==> 2
+bravo ==> 1
+gamma ==> 1
+
+julia> counter(eye(3))
+SimpleTools.Counter{Float64} with 2 entries:
+  0.0 => 6
+  1.0 => 3
+```
+
 #### Addition of counters
 
 If `c` and `d` are counters (of the same type of object) their sum
