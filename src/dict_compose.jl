@@ -1,6 +1,6 @@
 import Base.(*)
 
-dict_types{S,T}(d::Dict{S,T}) = (S,T)
+dict_types(d::Dict{S,T}) where {S,T} = (S,T) 
 
 """
 For dictionaries `f` and `g`, the composition `f*g` is a new
