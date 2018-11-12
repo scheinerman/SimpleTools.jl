@@ -5,5 +5,6 @@ obvious home, but are useful for my `SimpleWorld` modules.
 module SimpleTools
 
 include("dict_compose.jl")
+include("make_continuous.jl")
 
 end # end of module

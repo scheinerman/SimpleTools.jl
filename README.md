@@ -13,7 +13,7 @@ Miscellaneous code that is possibly useful
 for my `SimpleWorld` modules.
 
 
-## Composition of dictionaries
+## Composition of Dictionaries
 
 Dictionaries are like functions and so it makes sense
 to define a composition operation for them.
@@ -72,6 +72,19 @@ Dict{ASCIIString,Float64} with 1 entry:
   "alpha" => 3.33
 ```
 
-## SimpleTools
+## Continuity Restored
 
-**Note**: This has been move to the `SimpleTools` module.
+If one records the angle of a tangent vector as it traverses around a smooth closed
+curve, the values should be continuous. However, because there is a 2π ambiguity,
+one could see jumps. Here is an example.
+
+![](discon.png)
+
+If the angles are held in an array named `y` then the following will
+correct the problem.
+```
+julia> make_continuous!(y,2pi)
+```
+The resulting graph looks like this:
+
+![](con.png)

@@ -14,4 +14,10 @@ end
 f = rt*sq
 for k=1:10
     @test f[k] == k
-end 
+end
+
+
+y1 = [x^2 for x=0:.01:3]
+y2 = [mod(y,1) for y in y1 ]
+make_continuous!(y2,1)
+@test y1==y2
