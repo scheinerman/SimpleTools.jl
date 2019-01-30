@@ -86,6 +86,14 @@ The resulting graph looks like this:
 
 ## Flush printing
 
+The `flush_print` function right (or left) justifies its argument in a
+`String` of a given number of characters.
+
+
++ `flush_print(x,width)` returns a `String` version of `x` right justified
+in a string of length `width`.
++ Use `flush_print(x,width,false)` for left-justified.
+
 
 ```
 julia> flush_print("hello", 10)
