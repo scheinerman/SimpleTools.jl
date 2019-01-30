@@ -82,3 +82,23 @@ julia> make_continuous!(y,2pi)
 The resulting graph looks like this:
 
 ![](con.png)
+
+
+## Flush printing
+
+
+```
+julia> flush_print("hello", 10)
+"     hello"
+
+julia> flush_print("hello", 10, false)
+"hello     "
+
+julia> flush_print(sqrt(10),30)
+"            3.1622776601683795"
+
+julia> flush_print(sqrt(10),8)
+┌ Warning: Trunctated to fit width
+└ @ IntPrint ~/.julia/dev/IntPrint/src/IntPrint.jl:68
+"3.162277"
+```
