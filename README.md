@@ -110,3 +110,21 @@ julia> flush_print(sqrt(10),8)
 └ @ IntPrint ~/.julia/dev/IntPrint/src/IntPrint.jl:68
 "3.162277"
 ```
+
+## Print matrices for inclusion in *Sage*
+
+The `sage` function takes a one or two-dimensional matrix and outputs it
+in a way that can be copied and pasted into a *Sage* session.
+
+```julia
+julia> v = collect(1:5)
+5-element Array{Int64,1}:
+ 1
+ 2
+ 3
+ 4
+ 5
+
+julia> sage(v)
+Matrix([[1],[2],[3],[4],[5]])
+```
