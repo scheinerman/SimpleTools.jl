@@ -139,3 +139,40 @@ sage: Matrix([[1],[2],[3],[4],[5]])
 [5]
 sage:
 ```
+
+
+## Block diagonal concatenation of matrices
+
+For matrices `A` and `B` the function `dcat(A,B)` returns a new matrix of the
+form `[A 0; 0 B]` where the two `0`s are zero blocks of the appropriate size.
+The function `dcat` can be called with any positive number of arguments.
+```julia
+julia> A = ones(Int,2,3)
+2×3 Array{Int64,2}:
+ 1  1  1
+ 1  1  1
+
+julia> dcat(A,2A)
+4×6 Array{Int64,2}:
+ 1  1  1  0  0  0
+ 1  1  1  0  0  0
+ 0  0  0  2  2  2
+ 0  0  0  2  2  2
+
+julia> dcat(A,2A')
+5×5 Array{Int64,2}:
+ 1  1  1  0  0
+ 1  1  1  0  0
+ 0  0  0  2  2
+ 0  0  0  2  2
+ 0  0  0  2  2
+
+julia> dcat(A,2A,3A)
+6×9 Array{Int64,2}:
+ 1  1  1  0  0  0  0  0  0
+ 1  1  1  0  0  0  0  0  0
+ 0  0  0  2  2  2  0  0  0
+ 0  0  0  2  2  2  0  0  0
+ 0  0  0  0  0  0  3  3  3
+ 0  0  0  0  0  0  3  3  3
+```
