@@ -24,3 +24,9 @@ make_continuous!(y2,1)
 
 @test flush_print(23,5) == "   23"
 @test flush_print(23,5,false) == "23   "
+
+A = dcat(1,1,1)
+M = [1 0 0 ; 0 1 0 ; 0 0 1]
+@test A==M
+
+@test sage(A)==nothing
