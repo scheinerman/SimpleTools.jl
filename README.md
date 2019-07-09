@@ -174,7 +174,31 @@ julia> (x-2)*(3x-1) - (x^2)*(x+4)
 Poly(2 - 7*x - x^2 - x^3)
 ```
 
+## Characteristic polynomial
 
+`char_poly(A)` returns the characteristic polynomial of the matrix `A`:
+```
+julia> A = [1 2; 3 4]
+2×2 Array{Int64,2}:
+ 1  2
+ 3  4
+
+julia> char_poly(A)
+Poly(-2 - 5*x + x^2)
+
+julia> roots(ans)
+2-element Array{Float64,1}:
+  5.372281323269014
+ -0.3722813232690143
+
+julia> using LinearAlgebra
+
+julia> eigvals(A)
+2-element Array{Float64,1}:
+ -0.3722813232690143
+  5.372281323269014
+```
+Note: This is a horrible way to get the eigenvalues of a matrix.
 
 ## Block diagonal concatenation of matrices
 

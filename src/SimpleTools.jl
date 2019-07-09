@@ -11,4 +11,5 @@ include("sage.jl")
 include("dcat.jl")
 include("my_eye.jl")
 include("cofactor_det.jl")
+include("char_poly.jl")
 end # end of module
