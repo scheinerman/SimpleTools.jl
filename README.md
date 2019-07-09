@@ -105,10 +105,10 @@ julia> flush_print("hello", 10, false)
 julia> flush_print(sqrt(10),30)
 "            3.1622776601683795"
 
-julia> flush_print(sqrt(10),8)
+julia> flush_print(sqrt(10),5)
 ┌ Warning: Trunctated to fit width
-└ @ IntPrint ~/.julia/dev/IntPrint/src/IntPrint.jl:68
-"3.162277"
+└ @ SimpleTools ~/.julia/dev/SimpleTools/src/flush_print.jl:9
+"3.162"
 ```
 
 ## Print matrices for inclusion in *Sage*
