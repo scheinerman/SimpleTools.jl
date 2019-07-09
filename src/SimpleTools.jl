@@ -10,4 +10,5 @@ include("flush_print.jl")
 include("sage.jl")
 include("dcat.jl")
 include("my_eye.jl")
+include("cofactor_det.jl")
 end # end of module

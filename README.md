@@ -144,7 +144,36 @@ sage:
 
 Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
 giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
-`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`). 
+`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`).
+
+## Alternative determinant
+
+`cofactor_det(A)`  returns the determinant of the matrix `A`. The return type
+matches the entry type in `A`. This is *much* slower than Julia's `det` function
+but has the advantage that it can handle matrices with, for example, polynomial
+entries.
+```
+julia> using Polynomials
+
+julia> x = Poly([0,1])
+Poly(x)
+
+julia> A = Matrix{Poly{Int}}(undef,2,2);
+
+julia> A[1,1] = x-2; A[1,2] = x*x; A[2,1] = x+4; A[2,2] = 3x-1;
+
+julia> A
+2×2 Array{Poly{Int64},2}:
+ Poly(-2 + x)  Poly(x^2)     
+ Poly(4 + x)   Poly(-1 + 3*x)
+
+julia> cofactor_det(A)
+Poly(2 - 7*x - x^2 - x^3)
+
+julia> (x-2)*(3x-1) - (x^2)*(x+4)
+Poly(2 - 7*x - x^2 - x^3)
+```
+
 
 
 ## Block diagonal concatenation of matrices
