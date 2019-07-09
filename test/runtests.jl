@@ -30,3 +30,5 @@ M = [1 0 0 ; 0 1 0 ; 0 0 1]
 @test A==M
 
 @test sage(A)==nothing
+
+@test sum(eye(5)) == 5

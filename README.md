@@ -140,6 +140,12 @@ sage: Matrix([[1],[2],[3],[4],[5]])
 sage:
 ```
 
+## My `eye`
+
+Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
+giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
+`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`). 
+
 
 ## Block diagonal concatenation of matrices
 
