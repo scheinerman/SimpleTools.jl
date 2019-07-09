@@ -1,5 +1,5 @@
 using Polynomials
-
+export char_poly
 """
 `char_poly(A::Matrix)` returns the characteristic polynomial
 of the matrix `A`.
