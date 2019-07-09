@@ -66,7 +66,7 @@ Dict{ASCIIString,Float64} with 1 entry:
   "alpha" => 3.33
 ```
 
-## Continuity Restored
+## Continuity restored
 
 If one records the angle of a tangent vector as it traverses around a smooth closed
 curve, the values should be continuous. However, because there is a 2π ambiguity,
