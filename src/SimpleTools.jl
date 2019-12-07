@@ -12,4 +12,5 @@ include("dcat.jl")
 include("my_eye.jl")
 include("cofactor_det.jl")
 include("char_poly.jl")
+include("rational_det.jl")
 end # end of module

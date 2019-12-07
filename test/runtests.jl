@@ -38,3 +38,6 @@ using Polynomials
 x = Poly([0,1])
 A = [1 1; 3 2]
 @test char_poly(A) == (x-1)*(x-2)-3
+
+A = rand(Int,4,4) .% 100
+@test cofactor_det(A) == xdet(A)

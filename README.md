@@ -146,11 +146,48 @@ Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
 giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
 `eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`).
 
-## Alternative determinant
+## Alternative determinants
+
+#### Exact determinant of integer (or Gaussian integer) matrices
+
+`xdet(A)` returns the determinant of the matrix `A` where `A` is populated
+either with integers or Gaussian integers. The result is either a `BigInt`
+or a `Complex{BigInt}`, respectively.
+
+```
+julia> A = rand(Int,10,10) .% 100
+10×10 Array{Int64,2}:
+ -94   61   88   54  -57  -40  -31    9  -82   36
+ -60   56    8  -60  -54  -49  -67  -12    9   36
+  -8  -14   87  -27   58  -92  -51   88   64   23
+  15   59   85  -98   42   -7  -56   83  -14  -39
+ -28   61  -58   28   32  -14   55   51  -60  -22
+ -72   99  -39  -84   41   -1   85  -48   75  -85
+  98   63  -50   96  -35  -56   39   30   77  -14
+ -90   49   54  -18   71  -24  -13   10   31   92
+ -76   54   41   85   48  -14  -53   10  -24   52
+  13   84   26  -71   84   63   81  -12   86   24
+
+julia> xdet(A)
+123623256506197219738
+
+julia> det(A)
+1.2362325650619746e20
+```
+
+#### Rational matrices
+
+For matrices with integer or rational (or complex integer/rational) entries,
+one may use `rational_det`.
+
+#### Cofactor expansion
+
 
 `cofactor_det(A)`  returns the determinant of the matrix `A`. The return type
 matches the entry type in `A`. This is *much* slower than Julia's `det` function
-but has the advantage that it can handle matrices with, for example, polynomial
+or the `xdet` and `rational_det` functions in this module.
+
+However, it has the advantage that it can handle matrices with, for example, polynomial
 entries.
 ```
 julia> using Polynomials
@@ -173,6 +210,10 @@ Poly(2 - 7*x - x^2 - x^3)
 julia> (x-2)*(3x-1) - (x^2)*(x+4)
 Poly(2 - 7*x - x^2 - x^3)
 ```
+
+
+
+
 
 ## Characteristic polynomial
 
