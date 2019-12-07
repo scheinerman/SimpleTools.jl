@@ -150,7 +150,7 @@ giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
 
 #### Exact determinant of integer (or Gaussian integer) matrices
 
-`xdet(A)` returns the determinant of the matrix `A` where `A` is populated
+`xdet(A)` returns the exact determinant of the matrix `A` where `A` is populated
 either with integers or Gaussian integers. The result is either a `BigInt`
 or a `Complex{BigInt}`, respectively.
 
