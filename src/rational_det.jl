@@ -1,4 +1,4 @@
-export xdet, rational_det
+export int_det, rational_det
 
 """
 `rational_det(A)` computes the determinant of the matrix `A`.
@@ -50,17 +50,17 @@ function rational_det(A::Matrix{T}) where T
 end
 
 """
-`xdet(A)` gives the exact determinant of a matrix populated with
+`int_det(A)` gives the exact determinant of a matrix populated with
 integers or Gaussian integers. The return type is either
 `BigInt` or `Complex{BigInt}`, respectively.
 """
-function xdet(A::Matrix{T})::BigInt where T<:Integer
+function int_det(A::Matrix{T})::BigInt where T<:Integer
     dA = rational_det(A)
     return BigInt(dA)
 end
 
 
-function xdet(A::Matrix{Complex{T}})::Complex{BigInt} where T<:Integer
+function int_det(A::Matrix{Complex{T}})::Complex{BigInt} where T<:Integer
     dA = rational_det(A)
     return Complex{BigInt}(dA)
 end

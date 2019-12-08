@@ -150,7 +150,7 @@ giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
 
 #### Exact determinant of integer (or Gaussian integer) matrices
 
-`xdet(A)` returns the exact determinant of the matrix `A` where `A` is populated
+`int_det(A)` returns the exact determinant of the matrix `A` where `A` is populated
 either with integers or Gaussian integers. The result is either a `BigInt`
 or a `Complex{BigInt}`, respectively.
 
@@ -168,7 +168,7 @@ julia> A = rand(Int,10,10) .% 100
  -76   54   41   85   48  -14  -53   10  -24   52
   13   84   26  -71   84   63   81  -12   86   24
 
-julia> xdet(A)
+julia> int_det(A)
 123623256506197219738
 
 julia> det(A)
@@ -185,7 +185,7 @@ one may use `rational_det`.
 
 `cofactor_det(A)`  returns the determinant of the matrix `A`. The return type
 matches the entry type in `A`. This is *much* slower than Julia's `det` function
-or the `xdet` and `rational_det` functions in this module.
+or the `int_det` and `rational_det` functions in this module.
 
 However, it has the advantage that it can handle matrices with, for example, polynomial
 entries.
