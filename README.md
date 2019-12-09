@@ -1,9 +1,5 @@
 # SimpleTools
 
-[![Build Status](https://travis-ci.org/scheinerman/SimpleTools.jl.svg?branch=master)](https://travis-ci.org/scheinerman/SimpleTools.jl)
-
-[![codecov.io](http://codecov.io/github/scheinerman/SimpleTools.jl/coverage.svg?branch=master)](http://codecov.io/github/scheinerman/SimpleTools.jl?branch=master)
-
 Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
 
 
