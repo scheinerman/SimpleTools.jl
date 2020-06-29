@@ -8,8 +8,8 @@ function char_poly(A::Matrix{T}) where T
     r,c = size(A)
     @assert r==c "Matrix must be square"
 
-    L = zeros(Poly{T},r,r)
-    x = Poly{T}([0,1])
+    L = zeros(Polynomial{T},r,r)
+    x = Polynomial{T}([0,1])
     for i=1:r
         L[i,i] = x
     end
