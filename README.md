@@ -2,6 +2,21 @@
 
 Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
 
+---
+
+## Notice
+
+Several items dealing with linear algebra the were formerly in this
+package are moved to my `LinearAlgebraX` package.
+
+Items include:
+* `eye`
+* Determinant functions
+* Characteristic polynomial `char_poly`
+
+
+---
+
 
 ## Composition of Dictionaries
 
@@ -136,19 +151,24 @@ sage: Matrix([[1],[2],[3],[4],[5]])
 sage:
 ```
 
-## My `eye`
 
-Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
+
+
+
+
+## My `eye` &rarr; Moved to `LinearAlgebraX`
+
+~~Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
 giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
-`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`).
+`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`).~~
 
-## Alternative determinants
+## Alternative determinants &rarr; moded to `LinearAlgebraX`
 
 #### Exact determinant of integer (or Gaussian integer) matrices
 
-`int_det(A)` returns the exact determinant of the matrix `A` where `A` is populated
+~~~`int_det(A)` returns the exact determinant of the matrix `A` where `A` is populated
 either with integers or Gaussian integers. The result is either a `BigInt`
-or a `Complex{BigInt}`, respectively.
+or a `Complex{BigInt}`, respectively.~~~
 
 ```
 julia> A = rand(Int,10,10) .% 100
