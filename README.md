@@ -17,6 +17,14 @@ Items include:
 
 ---
 
+## Complex `mod`
+
+We have extended `mod` to that the first argument can be a Gaussian integer:
+```julia
+julia> mod(28-8im, 5)
+3 + 2im
+```
+
 
 ## Composition of Dictionaries
 
@@ -154,108 +162,6 @@ sage:
 
 
 
-
-
-## My `eye` &rarr; Moved to `LinearAlgebraX`
-
-~~Y-O-Y did the Julia developers remove `eye`? Restored here with `eye(T,n)`
-giving an `n`-by-`n` identity matrix with entries of type `T`. A plain
-`eye(n)` gives a `Float64` identity matrix (to match `ones` and `zeros`).~~
-
-## Alternative determinants &rarr; moded to `LinearAlgebraX`
-
-#### Exact determinant of integer (or Gaussian integer) matrices
-
-~~~`int_det(A)` returns the exact determinant of the matrix `A` where `A` is populated
-either with integers or Gaussian integers. The result is either a `BigInt`
-or a `Complex{BigInt}`, respectively.~~~
-
-```
-julia> A = rand(Int,10,10) .% 100
-10×10 Array{Int64,2}:
- -94   61   88   54  -57  -40  -31    9  -82   36
- -60   56    8  -60  -54  -49  -67  -12    9   36
-  -8  -14   87  -27   58  -92  -51   88   64   23
-  15   59   85  -98   42   -7  -56   83  -14  -39
- -28   61  -58   28   32  -14   55   51  -60  -22
- -72   99  -39  -84   41   -1   85  -48   75  -85
-  98   63  -50   96  -35  -56   39   30   77  -14
- -90   49   54  -18   71  -24  -13   10   31   92
- -76   54   41   85   48  -14  -53   10  -24   52
-  13   84   26  -71   84   63   81  -12   86   24
-
-julia> int_det(A)
-123623256506197219738
-
-julia> det(A)
-1.2362325650619746e20
-```
-
-#### Rational matrices
-
-For matrices with integer or rational (or complex integer/rational) entries,
-one may use `rational_det`.
-
-#### Cofactor expansion
-
-
-`cofactor_det(A)`  returns the determinant of the matrix `A`. The return type
-matches the entry type in `A`. This is *much* slower than Julia's `det` function
-or the `int_det` and `rational_det` functions in this module.
-
-However, it has the advantage that it can handle matrices with, for example, polynomial
-entries.
-```
-julia> using Polynomials
-
-julia> x = Poly([0,1])
-Poly(x)
-
-julia> A = Matrix{Poly{Int}}(undef,2,2);
-
-julia> A[1,1] = x-2; A[1,2] = x*x; A[2,1] = x+4; A[2,2] = 3x-1;
-
-julia> A
-2×2 Array{Poly{Int64},2}:
- Poly(-2 + x)  Poly(x^2)     
- Poly(4 + x)   Poly(-1 + 3*x)
-
-julia> cofactor_det(A)
-Poly(2 - 7*x - x^2 - x^3)
-
-julia> (x-2)*(3x-1) - (x^2)*(x+4)
-Poly(2 - 7*x - x^2 - x^3)
-```
-
-
-
-
-
-## Characteristic polynomial
-
-`char_poly(A)` returns the characteristic polynomial of the matrix `A`:
-```
-julia> A = [1 2; 3 4]
-2×2 Array{Int64,2}:
- 1  2
- 3  4
-
-julia> char_poly(A)
-Poly(-2 - 5*x + x^2)
-
-julia> roots(ans)
-2-element Array{Float64,1}:
-  5.372281323269014
- -0.3722813232690143
-
-julia> using LinearAlgebra
-
-julia> eigvals(A)
-2-element Array{Float64,1}:
- -0.3722813232690143
-  5.372281323269014
-```
-Note: This is a horrible way to get the eigenvalues of a matrix.
 
 ## Block diagonal concatenation of matrices
 
