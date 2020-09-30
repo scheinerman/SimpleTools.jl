@@ -1,5 +1,8 @@
 # SimpleTools
 
+[![Build Status](https://travis-ci.com/scheinerman/SimpleTools.jl.svg?branch=master)](https://travis-ci.com/scheinerman/SimpleTools.jl)
+
+
 Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
 
 ---
