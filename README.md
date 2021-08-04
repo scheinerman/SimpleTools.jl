@@ -1,6 +1,5 @@
 # SimpleTools
 
-[![Build Status](https://travis-ci.com/scheinerman/SimpleTools.jl.svg?branch=master)](https://travis-ci.com/scheinerman/SimpleTools.jl)
 
 
 Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
@@ -18,16 +17,10 @@ Items include:
 * Characteristic polynomial `char_poly`
 
 
+
+We have also moved `mod(z::Complex, m::Int)` to the `Mods` package. 
+
 ---
-
-## Complex `mod`
-
-We have extended `mod` to that the first argument can be a Gaussian integer:
-```julia
-julia> mod(28-8im, 5)
-3 + 2im
-```
-
 
 ## Composition of Dictionaries
 

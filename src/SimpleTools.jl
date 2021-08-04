@@ -9,7 +9,6 @@ include("make_continuous.jl")
 include("flush_print.jl")
 include("sage.jl")
 include("dcat.jl")
-include("cmod.jl")
 
 
 end # end of module
