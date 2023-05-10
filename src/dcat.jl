@@ -21,7 +21,7 @@ function dcat(A::Array{S,2}, B::Array{T,2}) where {S,T}
 end
 
 
-dcat(A) where {S} = _matrixify(A)
+dcat(A) = _matrixify(A)
 
 function dcat(A, B, C...)
     AB = dcat(A, B)
