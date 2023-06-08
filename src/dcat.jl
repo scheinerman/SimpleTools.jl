@@ -29,13 +29,20 @@ function dcat(A, B, C...)
 end
 
 
+"""
+    _matrixify(v::Array{T,1}) where {T}
+    _matrixify(x::T) where {T<:Number}
+
+Convert vector or a number into a `Matrix`.
+"""
 function _matrixify(v::Array{T,1}) where {T}
     n = length(v)
     return reshape(v, n, 1)
 end
 
-_matrixify(x::T) where {T<:Number} = _matrixify([x])
-
+function _matrixify(x::T) where {T<:Number}
+    _matrixify([x])
+end
 _matrixify(A::Array{T,2}) where {T} = A
 
 function dcat(v::T, A::Matrix{S}) where {S,T}
