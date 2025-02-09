@@ -11,14 +11,14 @@ Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
 Several items dealing with linear algebra that were formerly in this
 package have been moved to my [LinearAlgebraX](https://github.com/scheinerman/LinearAlgebraX.jl) package.
 
-Items include:
+The moved items include:
 * `eye`
 * Determinant functions
 * Characteristic polynomial `char_poly`
 
 
 
-We have also moved `mod(z::Complex, m::Int)` to the `Mods` package. 
+We have also moved `mod(z::Complex, m::Int)` to the [Mods](https://github.com/scheinerman/Mods.jl) package. 
 
 ---
 
@@ -43,7 +43,7 @@ the key type for `g`.
 
 Here is an example without any warnings.
 
-```julia
+```
 julia> f = Dict([("alpha", 1), ("bravo", 2)])
 Dict{ASCIIString,Int64} with 2 entries:
   "alpha" => 1
@@ -64,7 +64,7 @@ Dict{ASCIIString,Float64} with 2 entries:
 And this is an example in which problems arise
 that are not so serious that the composition fails:
 
-```julia
+```
 julia> f = Dict([("alpha", 1), ("bravo", 2)])
 Dict{ASCIIString,Int64} with 2 entries:
   "alpha" => 1
@@ -131,7 +131,7 @@ julia> flush_print(sqrt(10),5)
 The `sage` function takes a one or two-dimensional matrix and outputs it
 in a way that can be copied and pasted into a *Sage* session.
 
-```julia
+```
 julia> v = collect(1:5)
 5-element Array{Int64,1}:
  1
@@ -144,7 +144,7 @@ julia> sage(v)
 Matrix([[1],[2],[3],[4],[5]])
 ```
 
-```sage
+```
 sage: Matrix([[1],[2],[3],[4],[5]])
 ....:
 [1]
@@ -164,7 +164,7 @@ sage:
 For matrices `A` and `B` the function `dcat(A,B)` returns a new matrix of the
 form `[A 0; 0 B]` where the two `0`s are zero blocks of the appropriate size.
 The function `dcat` can be called with any positive number of arguments.
-```julia
+```
 julia> A = ones(Int,2,3)
 2×3 Array{Int64,2}:
  1  1  1
