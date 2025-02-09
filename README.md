@@ -2,7 +2,7 @@
 
 
 
-Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
+Miscellaneous code that is possibly useful.
 
 ---
 
