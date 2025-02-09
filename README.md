@@ -8,8 +8,8 @@ Miscellaneous code that is possibly useful for my `SimpleWorld` modules.
 
 ## Notice
 
-Several items dealing with linear algebra the were formerly in this
-package are moved to my `LinearAlgebraX` package.
+Several items dealing with linear algebra that were formerly in this
+package have been moved to my [LinearAlgebraX](https://github.com/scheinerman/LinearAlgebraX.jl) package.
 
 Items include:
 * `eye`
